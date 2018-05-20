@@ -184,7 +184,8 @@ public class ZegarGui extends JFrame
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				int budzik = 0;
-				try {
+				try 
+				{
 					budzik = Integer.parseInt(interwal.getText());
 				}
 				catch(Exception e) 
