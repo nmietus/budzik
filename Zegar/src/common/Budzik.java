@@ -1,4 +1,4 @@
-package views;
+package common;
 
 import java.awt.Toolkit;
 import java.time.LocalTime;

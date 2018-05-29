@@ -10,6 +10,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import common.Budzik;
+import common.Czas;
+import common.Dzwiek;
+
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.Toolkit;
