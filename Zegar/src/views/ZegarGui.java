@@ -30,6 +30,8 @@ import java.time.LocalTime;
 import java.awt.event.ActionEvent;
 
 import java.util.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 public class ZegarGui extends JFrame 
 {
 
@@ -44,6 +46,7 @@ public class ZegarGui extends JFrame
 	Dzwiek d = new Dzwiek();
 	
 	private JButton STOP;
+	private JLabel lblTest;
 	/**
 	 * Launch the application.
 	 */
@@ -72,6 +75,14 @@ public class ZegarGui extends JFrame
 	 */
 	public ZegarGui() 
 	{
+//		addKeyListener(new KeyAdapter() {
+//			@Override
+//			public void keyReleased(KeyEvent arg0) 
+//			{
+//				lblTest.setText(lblTest.getText()+arg0.toString());
+//			}
+//		});
+		
 		initComponents();
 		createEvents();
 		Czas.zegar(lblDzien, lblCzas);
@@ -105,7 +116,7 @@ public class ZegarGui extends JFrame
 	lblGodzina.setFont(new Font("Tahoma", Font.PLAIN, 18));
 	
 	interwal = new JTextField();
-	interwal.setText("1");
+	interwal.setText("60");
 	interwal.setColumns(10);
 	
 	JLabel lblMinut = new JLabel("minut");
@@ -123,38 +134,46 @@ public class ZegarGui extends JFrame
 	
 	STOP = new JButton("STOP");
 	
+	lblTest = new JLabel("test");
+	
 	GroupLayout gl_contentPane = new GroupLayout(contentPane);
 	gl_contentPane.setHorizontalGroup(
 		gl_contentPane.createParallelGroup(Alignment.TRAILING)
 			.addGroup(gl_contentPane.createSequentialGroup()
-				.addContainerGap()
 				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-					.addComponent(lblGodzina))
-				.addGap(3)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-					.addComponent(lblCzas, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
-					.addComponent(lblDzien, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE))
-				.addContainerGap(40, Short.MAX_VALUE))
-			.addGroup(gl_contentPane.createSequentialGroup()
-				.addContainerGap(242, Short.MAX_VALUE)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(lblLicznik, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(interwal, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblMinut, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)))
 					.addGroup(gl_contentPane.createSequentialGroup()
-						.addComponent(btnNewButton)
-						.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(STOP)))
+						.addContainerGap()
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblGodzina))
+						.addGap(3)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addComponent(lblCzas, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblDzien, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)))
+					.addGroup(gl_contentPane.createSequentialGroup()
+						.addContainerGap(221, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(lblLicznik, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(interwal, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblMinut, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(btnNewButton)
+								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(STOP))))
+					.addGroup(gl_contentPane.createSequentialGroup()
+						.addGap(313)
+						.addComponent(lblTest, GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)))
 				.addContainerGap())
 	);
 	gl_contentPane.setVerticalGroup(
 		gl_contentPane.createParallelGroup(Alignment.LEADING)
 			.addGroup(gl_contentPane.createSequentialGroup()
-				.addGap(66)
+				.addContainerGap()
+				.addComponent(lblTest, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+				.addGap(18)
 				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 					.addComponent(lblNewLabel)
 					.addComponent(lblDzien, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
@@ -163,7 +182,7 @@ public class ZegarGui extends JFrame
 					.addComponent(lblCzas, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
 					.addComponent(lblGodzina, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
 				.addGap(18)
-				.addComponent(lblLicznik, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+				.addComponent(lblLicznik, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
 				.addGap(18)
 				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 					.addComponent(interwal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -209,5 +228,28 @@ public class ZegarGui extends JFrame
 				b.koniec();
 			}
 		});
+		
+		interwal.addKeyListener(new KeyAdapter() 
+		{
+			@Override
+			public void keyReleased(KeyEvent e) 
+			{
+				int temp = e.getKeyCode();
+				if(temp==KeyEvent.VK_ENTER) {
+					int budzik = 0;
+					try 
+					{
+						budzik = Integer.parseInt(interwal.getText());
+					}
+					catch(Exception f) 
+					{
+						budzik = 0;
+					}
+					b.budzik(budzik, lblLicznik);
+				}
+				
+			}
+		});
+		
 	}
 }
